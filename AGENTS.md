@@ -13,7 +13,6 @@ The project-level source of truth is `DEV_SPEC.md`. If `DEV_SPEC.md` does not ex
 - Use skill scripts from `.codex/skills/<skill-name>/scripts/...`.
 - Do not use stale example paths such as `.github/skills/project-automation-skills/...`.
 - Do not overwrite existing user changes.
-- Do not commit changes unless the user explicitly asks.
 - Do not add real secrets, API keys, passwords, or private credentials to tracked files.
 
 ## Skill Workflow
@@ -60,6 +59,30 @@ Recommended order:
   - generated file path and content
 - Do not mark acceptance checks as passed based only on code inspection.
 - If verification cannot run, explain the missing dependency, configuration, or command.
+
+## Git Automation Rules
+
+- For each completed task-based implementation workflow, commit and push automatically after verification passes.
+- Do not commit or push if the required verification command fails.
+- Do not commit or push if verification could not run, unless the task is documentation-only or structure-only and has explicit file-system evidence.
+- Before staging files, run `git status --short`.
+- Stage only files that belong to the current task. Do not stage unrelated user changes.
+- Include `DEV_SPEC.md` when the current task status is updated.
+- Include `.codex/specs` when `DEV_SPEC.md` has been synchronized for the current task.
+- Use this commit message format for `DEV_SPEC.md` schedule tasks:
+  - `<type>: complete <TaskID> <short English task summary>`
+- Use these default commit types:
+  - `feat` for product features, APIs, UI, or user-visible behavior.
+  - `fix` for bug fixes.
+  - `test` for test-only changes.
+  - `docs` for documentation-only changes.
+  - `chore` for scaffolding, configuration, repository structure, generated specs, or maintenance.
+- Examples:
+  - `chore: complete A1 initialize repository structure`
+  - `feat: complete A2 initialize backend Spring Boot project`
+- After a successful commit, push to the current branch on `origin`:
+  - PowerShell: `$branch = git branch --show-current; git push origin $branch`
+- If `git push` fails because of authentication, network, or remote rejection, report the failure and leave the local commit intact.
 
 ## Packaging Rules
 

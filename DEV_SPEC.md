@@ -951,8 +951,8 @@ b2c-shop/
 
 | ID | Task | Status | Acceptance Notes | Main Files | Classes / Pages / APIs / Tables | Test Method |
 |----|------|--------|------------------|------------|----------------------------------|-------------|
-| A1 | 初始化仓库结构 | [ ] | 创建 apps/backend、apps/web、apps/admin、infra、tests、docs 基础目录 | root, apps, infra, docs | 无业务 API；无业务表 | `Get-ChildItem` 验证目录存在 |
-| A2 | 初始化后端 Spring Boot 工程 | [ ] | 后端可启动并暴露 health endpoint | `apps/backend/pom.xml`, `B2BTruckApplication.java` | `GET /actuator/health` | `cd apps/backend && mvn test` |
+| A1 | 初始化仓库结构 | [x] | 已创建 apps/backend、apps/web、apps/admin、infra、tests、docs 基础目录 | root, apps, infra, docs | 无业务 API；无业务表 | `Get-ChildItem` 验证目录存在 |
+| A2 | 初始化后端 Spring Boot 工程 | [x] | 已创建 Java 21 + Spring Boot 3.3.5 后端工程；`mvn test` 通过，Actuator health 返回 UP | `apps/backend/pom.xml`, `B2BTruckApplication.java` | `GET /actuator/health` | `cd apps/backend && mvn test` |
 | A3 | 初始化前台 Next.js 工程 | [ ] | 前台可启动并渲染默认 locale 首页 | `apps/web/package.json`, `src/app/[locale]/page.tsx` | `/en-US` 页面 | `cd apps/web && npm run build` |
 | A4 | 初始化后台 React Vite 工程 | [ ] | 后台可启动并渲染登录占位页 | `apps/admin/package.json`, `src/routes` | `/login` 页面 | `cd apps/admin && npm run build` |
 | A5 | 配置 Docker Compose 基础服务 | [ ] | PostgreSQL、Redis、MinIO 可启动 | `docker-compose.yml`, `.env.example` | `postgres`, `redis`, `minio` | `docker compose config` |

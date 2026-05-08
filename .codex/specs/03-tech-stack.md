@@ -4,7 +4,7 @@
 
 | 层级 | 技术 | 用途 | 选择原因 |
 |------|------|------|----------|
-| 后端语言 | Java 21 | 业务 API、CMS、CRM、AI 编排 | LTS、性能稳定、生态成熟。 |
+| 后端语言 | Java 17 | 业务 API、CMS、CRM、AI 编排 | LTS、环境兼容性好、生态成熟。 |
 | 后端框架 | Spring Boot 3.x | 模块化单体应用 | 适合企业级后台和 REST API。 |
 | 安全 | Spring Security + JWT | 后台认证和权限控制 | 标准方案，易测试，易扩展。 |
 | ORM | MyBatis-Plus | CRUD、分页、条件查询 | 与后台 CRUD 需求匹配，SQL 可控。 |
@@ -34,7 +34,7 @@
 后端采用模块化单体架构，一个 Spring Boot 应用内划分清晰业务模块：
 
 ```text
-Java 21
+Java 17
 Spring Boot 3.x
 Spring Security
 JWT

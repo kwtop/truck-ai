@@ -1,0 +1,8 @@
+.idea/
+docs/.idea/
+*.iml
+.env
+
+apps/backend/target/
+apps/backend/.mvn-temp/
+apps/backend/.codex/

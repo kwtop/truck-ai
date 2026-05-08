@@ -16,6 +16,11 @@ springdoc:
   swagger-ui:
     path: /swagger-ui/index.html
 
+app:
+  security:
+    jwt-secret: ${APP_SECURITY_JWT_SECRET:dev-only-change-this-secret}
+    jwt-expiration-seconds: ${APP_SECURITY_JWT_EXPIRATION_SECONDS:7200}
+
 management:
   endpoints:
     web:

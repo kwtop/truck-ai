@@ -73,3 +73,45 @@ body {
 .login-actions {
   width: 100%;
 }
+
+.admin-layout {
+  min-height: 100vh;
+  background: #f5f7fa;
+}
+
+.admin-header {
+  display: flex;
+  height: auto;
+  min-height: 72px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 28px;
+  background: #ffffff;
+  border-bottom: 1px solid rgba(23, 32, 51, 0.08);
+}
+
+.admin-header .ant-typography {
+  margin: 0;
+}
+
+.admin-header h2.ant-typography {
+  margin-top: 2px;
+  color: #172033;
+  font-size: 22px;
+  line-height: 1.25;
+}
+
+.admin-content {
+  padding: 28px;
+}
+
+.dashboard-section {
+  max-width: 960px;
+}
+
+.dashboard-section h3.ant-typography {
+  margin-top: 0;
+  color: #172033;
+  font-size: 20px;
+}

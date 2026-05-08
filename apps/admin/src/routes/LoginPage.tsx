@@ -1,6 +1,8 @@
 import { Button, Card, Form, Input, Space, Tag, Typography, message } from "antd";
 import { Controller, useForm } from "react-hook-form";
+import { Navigate, useNavigate } from "react-router-dom";
 import { z } from "zod";
+import { AuthApiError, login } from "@/features/auth/authApi";
 import { useAuthStore } from "@/stores/authStore";
 
 const loginSchema = z.object({
@@ -11,7 +13,9 @@ const loginSchema = z.object({
 type LoginFormValues = z.infer<typeof loginSchema>;
 
 export function LoginPage() {
-  const setPlaceholderUser = useAuthStore((state) => state.setPlaceholderUser);
+  const navigate = useNavigate();
+  const setLoginSession = useAuthStore((state) => state.setLoginSession);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const {
     control,
     handleSubmit,
@@ -23,6 +27,10 @@ export function LoginPage() {
     }
   });
 
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" replace />;
+  }
+
   const onSubmit = handleSubmit(async (values) => {
     const parsed = loginSchema.safeParse(values);
 
@@ -30,8 +38,15 @@ export function LoginPage() {
       return;
     }
 
-    setPlaceholderUser(parsed.data.username);
-    message.success("Login placeholder submitted");
+    try {
+      const response = await login(parsed.data);
+      setLoginSession(response);
+      message.success("Signed in");
+      navigate("/dashboard", { replace: true });
+    } catch (error) {
+      const description = error instanceof AuthApiError ? error.message : "Unable to sign in";
+      message.error(description);
+    }
   });
 
   return (
@@ -44,7 +59,7 @@ export function LoginPage() {
               Admin Login
             </Typography.Title>
           </div>
-          <Tag color="processing">A4</Tag>
+          <Tag color="processing">B5</Tag>
         </div>
 
         <Card className="login-card" bordered={false}>
@@ -58,9 +73,7 @@ export function LoginPage() {
                 control={control}
                 name="username"
                 rules={{ required: "Username is required" }}
-                render={({ field }) => (
-                  <Input {...field} autoComplete="username" placeholder="admin@example.com" />
-                )}
+                render={({ field }) => <Input {...field} autoComplete="username" placeholder="admin" />}
               />
             </Form.Item>
 
@@ -87,9 +100,6 @@ export function LoginPage() {
               <Button type="primary" htmlType="submit" loading={isSubmitting} block>
                 Sign in
               </Button>
-              <Typography.Text type="secondary">
-                Authentication API integration is scheduled for task B5.
-              </Typography.Text>
             </Space>
           </Form>
         </Card>

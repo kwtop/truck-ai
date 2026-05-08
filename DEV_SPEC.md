@@ -959,10 +959,10 @@ b2c-shop/
 | A6 | 添加 Flyway 基础迁移 | [x] | 已添加 Flyway 配置和 baseline migration；`mvn -s .mvn-temp/settings.xml test` 通过，日志确认创建 `schema_version` 并应用 v1 baseline | `apps/backend/src/main/resources/db/migration` | Flyway baseline | `mvn test` 验证 migration 加载 |
 | A7 | 添加 OpenAPI 和统一响应 | [x] | 已添加 Springdoc OpenAPI、Swagger UI、`ApiResponse`、`PageResponse`、requestId 和统一 JSON 响应包装；`mvn -s .mvn-temp/settings.xml test` 通过 | `common`, `config` | `ApiResponse`, `PageResponse` | MockMvc 测试响应结构 |
 | B1 | 创建用户权限数据表 | [x] | 已新增 sys_user、sys_role、sys_permission、sys_user_role、sys_role_permission 迁移；`DOCKER_HOST=npipe:////./pipe/dockerDesktopLinuxEngine mvn -s .mvn-temp/settings.xml test` 通过，Testcontainers PostgreSQL 16 实际应用 v1/v2 migrations | Flyway migration | `sys_user`, `sys_role`, `sys_permission` | Testcontainers 跑 migration |
-| B2 | 实现密码登录 | [ ] | 管理员可用用户名密码登录并获取 JWT | `auth`, `user` | `POST /api/admin/auth/login` | MockMvc 登录成功/失败 |
-| B3 | 实现 JWT 认证过滤器 | [ ] | 后台 API 无 token 返回 401，有效 token 放行 | `auth/security` | `JwtAuthenticationFilter` | Security integration test |
-| B4 | 实现角色权限模型 | [ ] | 用户权限可从角色聚合，接口可校验权限 | `user`, `auth` | `PermissionService` | 单元测试权限聚合 |
-| B5 | 后台登录页接入 API | [ ] | 登录成功保存 token 并进入后台布局 | `apps/admin/src/features/auth` | `/login`, auth store | Vitest + 手动 UI smoke |
+| B2 | 实现密码登录 | [x] | 已实现用户名密码登录、BCrypt 校验、JWT 生成、权限 code 返回和失败 401；`mvn -s .mvn-temp/settings.xml -Dtest=AuthControllerIntegrationTests test` 通过 | `auth`, `user` | `POST /api/admin/auth/login` | MockMvc 登录成功/失败 |
+| B3 | 实现 JWT 认证过滤器 | [x] | 已实现 Spring Security JWT 过滤器、无 token/无效 token 统一 401、有效 token 放行；`mvn -s .mvn-temp/settings.xml -Dtest=AuthControllerIntegrationTests test` 通过 | `auth/security` | `JwtAuthenticationFilter`, `SecurityConfig`, `GET /api/admin/auth/me` | Security integration test |
+| B4 | 实现角色权限模型 | [x] | 已抽出 `PermissionService` 聚合角色权限，并提供接口权限断言和 403 统一响应；`mvn -s .mvn-temp/settings.xml "-Dtest=AuthControllerIntegrationTests,PermissionServiceTests" test` 通过 | `user`, `auth` | `PermissionService`, `GET /api/admin/auth/permission-check` | 单元测试权限聚合 + MockMvc 权限校验 |
+| B5 | 后台登录页接入 API | [x] | 已接入 `POST /api/admin/auth/login`，登录成功保存 token/user/permissions 并跳转 `/dashboard`；`npm run test` 和 `npm run build` 通过 | `apps/admin/src/features/auth`, `apps/admin/src/stores/authStore.ts`, `apps/admin/src/routes` | `/login`, `/dashboard`, auth store | Vitest + build smoke |
 | B6 | 后台权限菜单 | [ ] | 菜单按权限显示，未授权路由不可访问 | `apps/admin/src/lib/permissions` | route guard | Vitest route guard |
 | C1 | 创建车型分类表和实体 | [ ] | 可保存树形车型分类 | migration, `category` | `vehicle_category` | Repository test |
 | C2 | 实现后台分类 CRUD API | [ ] | 后台可新增、编辑、启停、排序分类 | `category/controller` | `GET/POST/PUT /api/admin/categories` | MockMvc CRUD |

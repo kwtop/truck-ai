@@ -30,7 +30,7 @@
 | B5 | 后台登录页接入 API | [x] | 已接入 `POST /api/admin/auth/login`，登录成功保存 token/user/permissions 并跳转 `/dashboard`；`npm run test` 和 `npm run build` 通过 | `apps/admin/src/features/auth`, `apps/admin/src/stores/authStore.ts`, `apps/admin/src/routes` | `/login`, `/dashboard`, auth store | Vitest + build smoke |
 | B6 | 后台权限菜单 | [x] | 已按权限过滤后台菜单，并用 route guard 阻止未授权路由；`npm run test` 和 `npm run build` 通过 | `apps/admin/src/lib/permissions`, `apps/admin/src/routes` | route guard, `/products`, `/leads` | Vitest route guard + build smoke |
 | C1 | 创建车型分类表和实体 | [x] | 已新增 `vehicle_category` migration、实体和 Repository，可保存父子分类；`mvn -s .mvn-temp/settings.xml -Dtest=VehicleCategoryRepositoryTests test` 通过 | migration, `category` | `vehicle_category`, `VehicleCategoryRepository` | Repository test |
-| C2 | 实现后台分类 CRUD API | [ ] | 后台可新增、编辑、启停、排序分类 | `category/controller` | `GET/POST/PUT /api/admin/categories` | MockMvc CRUD |
+| C2 | 实现后台分类 CRUD API | [x] | 已实现后台分类树查询、新增、编辑、启停和排序，并校验 `category:read/write` 权限；`mvn -s .mvn-temp/settings.xml "-Dtest=VehicleCategoryRepositoryTests,VehicleCategoryControllerIntegrationTests" test` 通过 | `category/controller` | `GET/POST/PUT /api/admin/categories` | MockMvc CRUD |
 | C3 | 实现后台分类管理页面 | [ ] | Ant Design Tree/Table 可维护分类 | `apps/admin/src/features/category` | Category list/form | Vitest component test |
 | C4 | 创建参数定义表和实体 | [ ] | 可为分类配置动态参数模板 | migration, `attribute` | `vehicle_attribute_definition` | Repository test |
 | C5 | 实现参数模板 CRUD API | [ ] | 参数支持类型、单位、选项、必填、筛选、校验规则 | `attribute/controller` | `GET/POST/PUT /api/admin/attributes` | MockMvc validation |

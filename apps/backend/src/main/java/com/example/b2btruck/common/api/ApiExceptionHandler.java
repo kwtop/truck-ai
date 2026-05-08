@@ -1,6 +1,7 @@
 package com.example.b2btruck.common.api;
 
 import com.example.b2btruck.auth.AuthFailureException;
+import com.example.b2btruck.category.VehicleCategoryNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +34,32 @@ public class ApiExceptionHandler {
                 .status(HttpStatus.FORBIDDEN)
                 .body(ApiResponse.failure(
                         new ApiError("AUTH_FORBIDDEN", exception.getMessage()),
+                        resolveRequestId(request)
+                ));
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    ResponseEntity<ApiResponse<Void>> handleBadRequest(
+            IllegalArgumentException exception,
+            HttpServletRequest request
+    ) {
+        return ResponseEntity
+                .badRequest()
+                .body(ApiResponse.failure(
+                        new ApiError("BAD_REQUEST", exception.getMessage()),
+                        resolveRequestId(request)
+                ));
+    }
+
+    @ExceptionHandler(VehicleCategoryNotFoundException.class)
+    ResponseEntity<ApiResponse<Void>> handleCategoryNotFound(
+            VehicleCategoryNotFoundException exception,
+            HttpServletRequest request
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(ApiResponse.failure(
+                        new ApiError("CATEGORY_NOT_FOUND", exception.getMessage()),
                         resolveRequestId(request)
                 ));
     }

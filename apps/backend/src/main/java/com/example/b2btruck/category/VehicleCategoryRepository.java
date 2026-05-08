@@ -78,6 +78,29 @@ public class VehicleCategoryRepository {
         return categories.stream().findFirst();
     }
 
+    public List<VehicleCategory> findAll(String keyword, String status) {
+        String normalizedKeyword = keyword == null || keyword.isBlank() ? null : "%" + keyword.trim().toLowerCase() + "%";
+        String normalizedStatus = status == null || status.isBlank() ? null : status.trim();
+
+        return jdbcTemplate.query(
+                """
+                        select *
+                        from vehicle_category
+                        where deleted_at is null
+                          and (? is null or lower(code) like ? or lower(slug) like ? or lower(default_name) like ?)
+                          and (? is null or status = ?)
+                        order by parent_id nulls first, sort_order, id
+                        """,
+                this::mapCategory,
+                normalizedKeyword,
+                normalizedKeyword,
+                normalizedKeyword,
+                normalizedKeyword,
+                normalizedStatus,
+                normalizedStatus
+        );
+    }
+
     public List<VehicleCategory> findByParentId(Long parentId) {
         return jdbcTemplate.query(
                 """
@@ -90,6 +113,42 @@ public class VehicleCategoryRepository {
                 this::mapCategory,
                 parentId
         );
+    }
+
+    public VehicleCategory update(Long id, UpdateVehicleCategoryCommand command) {
+        int updated = jdbcTemplate.update(
+                """
+                        update vehicle_category
+                        set parent_id = ?,
+                            code = ?,
+                            slug = ?,
+                            default_name = ?,
+                            default_description = ?,
+                            status = ?,
+                            sort_order = ?,
+                            seo_config = ?::jsonb,
+                            display_config = ?::jsonb,
+                            updated_at = now()
+                        where id = ?
+                          and deleted_at is null
+                        """,
+                command.parentId(),
+                command.code(),
+                command.slug(),
+                command.defaultName(),
+                command.defaultDescription(),
+                command.status(),
+                command.sortOrder(),
+                defaultJson(command.seoConfig()),
+                defaultJson(command.displayConfig()),
+                id
+        );
+
+        if (updated != 1) {
+            throw new VehicleCategoryNotFoundException(id);
+        }
+
+        return findById(id).orElseThrow(() -> new VehicleCategoryNotFoundException(id));
     }
 
     private VehicleCategory mapCategory(ResultSet resultSet, int rowNum) throws SQLException {

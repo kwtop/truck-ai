@@ -31,12 +31,12 @@
 | B6 | 后台权限菜单 | [x] | 已按权限过滤后台菜单，并用 route guard 阻止未授权路由；`npm run test` 和 `npm run build` 通过 | `apps/admin/src/lib/permissions`, `apps/admin/src/routes` | route guard, `/products`, `/leads` | Vitest route guard + build smoke |
 | C1 | 创建车型分类表和实体 | [x] | 已新增 `vehicle_category` migration、实体和 Repository，可保存父子分类；`mvn -s .mvn-temp/settings.xml -Dtest=VehicleCategoryRepositoryTests test` 通过 | migration, `category` | `vehicle_category`, `VehicleCategoryRepository` | Repository test |
 | C2 | 实现后台分类 CRUD API | [x] | 已实现后台分类树查询、新增、编辑、启停和排序，并校验 `category:read/write` 权限；`mvn -s .mvn-temp/settings.xml "-Dtest=VehicleCategoryRepositoryTests,VehicleCategoryControllerIntegrationTests" test` 通过 | `category/controller` | `GET/POST/PUT /api/admin/categories` | MockMvc CRUD |
-| C3 | 实现后台分类管理页面 | [ ] | Ant Design Tree/Table 可维护分类 | `apps/admin/src/features/category` | Category list/form | Vitest component test |
-| C4 | 创建参数定义表和实体 | [ ] | 可为分类配置动态参数模板 | migration, `attribute` | `vehicle_attribute_definition` | Repository test |
-| C5 | 实现参数模板 CRUD API | [ ] | 参数支持类型、单位、选项、必填、筛选、校验规则 | `attribute/controller` | `GET/POST/PUT /api/admin/attributes` | MockMvc validation |
-| C6 | 后台参数模板表单 | [ ] | 可为油罐车、清障车配置不同参数 | `apps/admin/src/features/attribute` | Attribute editor | Vitest 表单校验 |
-| C7 | 前台公开分类 API | [ ] | 前台可获取启用分类树和 SEO 字段 | `category/public` | `GET /api/public/categories` | MockMvc public API |
-| D1 | 创建产品核心表 | [ ] | product、product_translation 可迁移 | migration, `product` | `product`, `product_translation` | Testcontainers migration |
+| C3 | 实现后台分类管理页面 | [x] | 已实现后台分类树表格、新增/编辑/启停/排序入口和权限菜单接入；`npm run test`、`npm run build` 通过 | `apps/admin/src/features/category` | Category list/form | Vitest component test |
+| C4 | 创建参数定义表和实体 | [x] | 已新增 `vehicle_attribute_definition` migration、实体和 Repository，可按分类维护参数定义；`mvn -s .mvn-temp/settings.xml test` 通过，25 tests、0 failures、1 skipped | migration, `attribute` | `vehicle_attribute_definition` | Repository test |
+| C5 | 实现参数模板 CRUD API | [x] | 已实现 `GET/POST/PUT /api/admin/attributes`、`attribute:read/write` 权限、类型/状态/JSON 配置校验；`mvn -s .mvn-temp/settings.xml test` 通过，29 tests、0 failures、1 skipped | `attribute/controller` | `GET/POST/PUT /api/admin/attributes` | MockMvc validation |
+| C6 | 后台参数模板表单 | [x] | 已实现后台参数模板页面、分类选择、属性列表、新增/编辑表单、JSON 配置校验和权限菜单接入；`npm run test`、`npm run build` 通过 | `apps/admin/src/features/attribute` | Attribute editor | Vitest 表单校验 |
+| C7 | 前台公开分类 API | [x] | 已实现 `GET /api/public/categories`，无需后台 JWT，只返回 ACTIVE 分类树并输出 SEO/display JSON 字段；`mvn -s .mvn-temp/settings.xml test` 通过，31 tests、0 failures、1 skipped | `category/public` | `GET /api/public/categories` | MockMvc public API |
+| D1 | 创建产品核心表 | [x] | 已新增 `product`、`product_translation` migration，并验证表结构、唯一约束和 translation 级联删除；`mvn -s .mvn-temp/settings.xml test` 通过，34 tests、0 failures、1 skipped | migration, `product` | `product`, `product_translation` | migration test |
 | D2 | 实现产品 specs 校验 | [ ] | 保存产品时按分类参数模板校验 JSONB specs | `product/service` | `ProductSpecValidator` | 单元测试各字段类型 |
 | D3 | 实现后台产品 CRUD API | [ ] | 可创建草稿、更新、发布、删除产品 | `product/controller` | `GET/POST/PUT/DELETE /api/admin/products` | MockMvc CRUD |
 | D4 | 实现产品多语言维护 | [ ] | 产品名称、描述、SEO 可按 locale 保存 | `product/translation` | `product_translation` | Service test fallback |

@@ -79,6 +79,19 @@ body {
   background: #f5f7fa;
 }
 
+.admin-sider {
+  background: #ffffff;
+  border-right: 1px solid rgba(23, 32, 51, 0.08);
+}
+
+.admin-sider-brand {
+  display: flex;
+  min-height: 72px;
+  align-items: center;
+  padding: 0 20px;
+  border-bottom: 1px solid rgba(23, 32, 51, 0.08);
+}
+
 .admin-header {
   display: flex;
   height: auto;

@@ -19,6 +19,18 @@ export const adminMenuItems: AdminMenuItem[] = [
     requiredPermission: "product:read"
   },
   {
+    key: "categories",
+    label: "Categories",
+    path: "/categories",
+    requiredPermission: "category:read"
+  },
+  {
+    key: "attributes",
+    label: "Attributes",
+    path: "/attributes",
+    requiredPermission: "attribute:read"
+  },
+  {
     key: "leads",
     label: "Leads",
     path: "/leads",

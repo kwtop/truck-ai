@@ -1,6 +1,7 @@
 package com.example.b2btruck.common.api;
 
 import com.example.b2btruck.auth.AuthFailureException;
+import com.example.b2btruck.attribute.VehicleAttributeDefinitionNotFoundException;
 import com.example.b2btruck.category.VehicleCategoryNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -60,6 +61,19 @@ public class ApiExceptionHandler {
                 .status(HttpStatus.NOT_FOUND)
                 .body(ApiResponse.failure(
                         new ApiError("CATEGORY_NOT_FOUND", exception.getMessage()),
+                        resolveRequestId(request)
+                ));
+    }
+
+    @ExceptionHandler(VehicleAttributeDefinitionNotFoundException.class)
+    ResponseEntity<ApiResponse<Void>> handleAttributeDefinitionNotFound(
+            VehicleAttributeDefinitionNotFoundException exception,
+            HttpServletRequest request
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(ApiResponse.failure(
+                        new ApiError("ATTRIBUTE_NOT_FOUND", exception.getMessage()),
                         resolveRequestId(request)
                 ));
     }

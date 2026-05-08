@@ -3,6 +3,8 @@ package com.example.b2btruck.common.api;
 import com.example.b2btruck.auth.AuthFailureException;
 import com.example.b2btruck.attribute.VehicleAttributeDefinitionNotFoundException;
 import com.example.b2btruck.category.VehicleCategoryNotFoundException;
+import com.example.b2btruck.product.ProductNotFoundException;
+import com.example.b2btruck.product.ProductSpecValidationException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,6 +54,19 @@ public class ApiExceptionHandler {
                 ));
     }
 
+    @ExceptionHandler(ProductSpecValidationException.class)
+    ResponseEntity<ApiResponse<Void>> handleProductSpecValidation(
+            ProductSpecValidationException exception,
+            HttpServletRequest request
+    ) {
+        return ResponseEntity
+                .badRequest()
+                .body(ApiResponse.failure(
+                        new ApiError("PRODUCT_SPEC_INVALID", exception.getMessage()),
+                        resolveRequestId(request)
+                ));
+    }
+
     @ExceptionHandler(VehicleCategoryNotFoundException.class)
     ResponseEntity<ApiResponse<Void>> handleCategoryNotFound(
             VehicleCategoryNotFoundException exception,
@@ -74,6 +89,19 @@ public class ApiExceptionHandler {
                 .status(HttpStatus.NOT_FOUND)
                 .body(ApiResponse.failure(
                         new ApiError("ATTRIBUTE_NOT_FOUND", exception.getMessage()),
+                        resolveRequestId(request)
+                ));
+    }
+
+    @ExceptionHandler(ProductNotFoundException.class)
+    ResponseEntity<ApiResponse<Void>> handleProductNotFound(
+            ProductNotFoundException exception,
+            HttpServletRequest request
+    ) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(ApiResponse.failure(
+                        new ApiError("PRODUCT_NOT_FOUND", exception.getMessage()),
                         resolveRequestId(request)
                 ));
     }

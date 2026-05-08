@@ -8,14 +8,20 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@ActiveProfiles("test")
 class B2BTruckApplicationTests {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Test
     void contextLoads() {
@@ -26,5 +32,15 @@ class B2BTruckApplicationTests {
         mockMvc.perform(get("/actuator/health"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value("UP"));
+    }
+
+    @Test
+    void flywayBaselineCreatesSchemaVersionTable() {
+        Integer tableCount = jdbcTemplate.queryForObject(
+                "select count(*) from information_schema.tables where table_name = 'schema_version'",
+                Integer.class
+        );
+
+        org.assertj.core.api.Assertions.assertThat(tableCount).isEqualTo(1);
     }
 }

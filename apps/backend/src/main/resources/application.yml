@@ -1,6 +1,20 @@
 spring:
   application:
     name: b2btruck-backend
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/b2c_shop}
+    username: ${SPRING_DATASOURCE_USERNAME:b2c_shop}
+    password: ${SPRING_DATASOURCE_PASSWORD:b2c_shop_dev}
+  flyway:
+    enabled: true
+    table: schema_version
+    locations: classpath:db/migration
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui/index.html
 
 management:
   endpoints:

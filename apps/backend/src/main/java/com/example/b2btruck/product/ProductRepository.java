@@ -90,6 +90,20 @@ public class ProductRepository {
         return products.stream().findFirst();
     }
 
+    public Optional<Product> findBySlug(String slug) {
+        List<Product> products = jdbcTemplate.query(
+                """
+                        select *
+                        from product
+                        where slug = ? and deleted_at is null
+                        """,
+                this::mapProduct,
+                slug
+        );
+
+        return products.stream().findFirst();
+    }
+
     public List<Product> findAll(Long categoryId, String keyword, String status) {
         String normalizedKeyword = keyword == null || keyword.isBlank() ? null : "%" + keyword.trim().toLowerCase() + "%";
         String normalizedStatus = status == null || status.isBlank() ? null : status.trim();

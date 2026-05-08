@@ -20,6 +20,12 @@ app:
   security:
     jwt-secret: ${APP_SECURITY_JWT_SECRET:dev-only-change-this-secret}
     jwt-expiration-seconds: ${APP_SECURITY_JWT_EXPIRATION_SECONDS:7200}
+  minio:
+    endpoint: ${APP_MINIO_ENDPOINT:http://localhost:9000}
+    access-key: ${APP_MINIO_ACCESS_KEY:minioadmin}
+    secret-key: ${APP_MINIO_SECRET_KEY:minioadmin}
+    bucket: ${APP_MINIO_BUCKET:b2btruck-media}
+    ensure-bucket: ${APP_MINIO_ENSURE_BUCKET:false}
 
 management:
   endpoints:

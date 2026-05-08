@@ -1,6 +1,7 @@
 import { Navigate, RouterProvider, createBrowserRouter } from "react-router-dom";
 import { AttributePage } from "@/features/attribute/AttributePage";
 import { CategoryPage } from "@/features/category/CategoryPage";
+import { ProductPage } from "@/features/product/ProductPage";
 import { AdminLayout } from "./AdminLayout";
 import { DashboardPage } from "./DashboardPage";
 import { LoginPage } from "./LoginPage";
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
     path: "/products",
     element: (
       <AdminLayout>
-        <PlaceholderPage title="Products" />
+        <ProductPage />
       </AdminLayout>
     )
   },

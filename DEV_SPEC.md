@@ -974,12 +974,12 @@ b2c-shop/
 | D1 | 创建产品核心表 | [x] | 已新增 `product`、`product_translation` migration，并验证表结构、唯一约束和 translation 级联删除；`mvn -s .mvn-temp/settings.xml test` 通过，34 tests、0 failures、1 skipped | migration, `product` | `product`, `product_translation` | migration test |
 | D2 | 实现产品 specs 校验 | [x] | 已新增 `ProductSpecValidator`，按分类参数模板校验 required、unknown fields、number/text/select/multi_select/boolean/range、options、min/max/regex；`mvn -s .mvn-temp/settings.xml test` 通过，41 tests、0 failures、1 skipped | `product/service` | `ProductSpecValidator` | 单元测试各字段类型 |
 | D3 | 实现后台产品 CRUD API | [x] | 已实现后台产品列表、详情、创建草稿、更新发布和软删除，并校验 `product:read/write` 权限与动态 specs；`mvn -s .mvn-temp/settings.xml test` 通过，44 tests、0 failures、1 skipped | `product/controller` | `GET/POST/PUT/DELETE /api/admin/products` | MockMvc CRUD |
-| D4 | 实现产品多语言维护 | [ ] | 产品名称、描述、SEO 可按 locale 保存 | `product/translation` | `product_translation` | Service test fallback |
-| D5 | 后台产品列表和编辑页 | [ ] | 可选择分类、填写动态参数、多语言、SEO | `apps/admin/src/features/product` | Product list/form | Vitest + UI smoke |
-| D6 | 前台产品列表 API | [ ] | 支持分类、locale、分页、参数筛选 | `product/public` | `GET /api/public/products` | MockMvc filter test |
-| D7 | 前台产品详情 API | [ ] | 返回产品、多语言、specs、媒体、SEO | `product/public` | `GET /api/public/products/{slug}` | MockMvc detail test |
-| D8 | 前台产品详情页 | [ ] | 动态渲染参数、媒体、PDF、RFQ CTA | `apps/web/src/app/[locale]/products` | Product detail page | Playwright 页面 smoke |
-| E1 | 配置 MinIO 客户端 | [ ] | 后端可连接 MinIO 并创建 bucket | `media/config` | `MinioClientConfig` | Testcontainers/Mock test |
+| D4 | 实现产品多语言维护 | [x] | 已实现产品翻译列表、按 locale 读取和 upsert，支持名称、描述、应用、localizedSpecs 与 SEO 字段，缺失 locale 时回退默认产品内容；`mvn -s .mvn-temp/settings.xml test` 通过，49 tests、0 failures、1 skipped | `product/translation` | `product_translation` | Service test fallback |
+| D5 | 后台产品列表和编辑页 | [x] | 已实现后台产品列表、筛选、新增/编辑/删除、分类选择、按属性模板填写动态 specs、单 locale 翻译和 SEO/shipping JSON；`npm run test` 和 `npm run build` 通过 | `apps/admin/src/features/product` | Product list/form | Vitest + UI smoke |
+| D6 | 前台产品列表 API | [x] | 已实现 `GET /api/public/products`，只返回 PUBLISHED 且 ACTIVE 分类产品，支持 category(id/slug/code 含子分类)、locale 翻译 fallback、分页、keyword 和 specs 参数筛选；`mvn -s .mvn-temp/settings.xml test` 通过，52 tests、0 failures、1 skipped | `product/public` | `GET /api/public/products` | MockMvc filter test |
+| D7 | 前台产品详情 API | [x] | 已实现 `GET /api/public/products/{slug}`，仅返回 PUBLISHED 且 ACTIVE 分类产品，支持 locale 多语言 fallback、specs/localizedSpecs、shippingConfig、SEO，并预留 media/buttons 空数组；`mvn -s .mvn-temp/settings.xml test` 通过，54 tests、0 failures、1 skipped | `product/public` | `GET /api/public/products/{slug}` | MockMvc detail test |
+| D8 | 前台产品详情页 | [x] | 已实现 `GET /api/public/products/{slug}` 驱动的前台详情页，动态渲染 SEO、参数、媒体/PDF、运输信息和 RFQ CTA；`npm run build` 与 `npm run typecheck` 通过 | `apps/web/src/app/[locale]/products` | Product detail page | Build/typecheck smoke |
+| E1 | 配置 MinIO 客户端 | [x] | 已接入 MinIO Java SDK，新增 `MinioClientConfig` 和可配置 bucket 初始化器，默认不连接对象存储，开启 `APP_MINIO_ENSURE_BUCKET=true` 后检查并创建 bucket；`mvn -s .mvn-temp/settings.xml test` 通过，57 tests、0 failures、1 skipped | `media/config` | `MinioClientConfig` | Mockito bucket test |
 | E2 | 创建媒体表 | [ ] | media_asset 和 product_media 可迁移 | migration, `media` | `media_asset`, `product_media` | migration test |
 | E3 | 实现上传 API | [ ] | 支持图片、视频、PDF 上传并保存元数据 | `media/controller` | `POST /api/admin/media/upload` | MockMvc multipart |
 | E4 | 实现媒体列表 API | [ ] | 支持按类型、文件名、上传人筛选 | `media/controller` | `GET /api/admin/media` | MockMvc pagination |

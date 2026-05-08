@@ -28,7 +28,7 @@
 | B3 | 实现 JWT 认证过滤器 | [x] | 已实现 Spring Security JWT 过滤器、无 token/无效 token 统一 401、有效 token 放行；`mvn -s .mvn-temp/settings.xml -Dtest=AuthControllerIntegrationTests test` 通过 | `auth/security` | `JwtAuthenticationFilter`, `SecurityConfig`, `GET /api/admin/auth/me` | Security integration test |
 | B4 | 实现角色权限模型 | [x] | 已抽出 `PermissionService` 聚合角色权限，并提供接口权限断言和 403 统一响应；`mvn -s .mvn-temp/settings.xml "-Dtest=AuthControllerIntegrationTests,PermissionServiceTests" test` 通过 | `user`, `auth` | `PermissionService`, `GET /api/admin/auth/permission-check` | 单元测试权限聚合 + MockMvc 权限校验 |
 | B5 | 后台登录页接入 API | [x] | 已接入 `POST /api/admin/auth/login`，登录成功保存 token/user/permissions 并跳转 `/dashboard`；`npm run test` 和 `npm run build` 通过 | `apps/admin/src/features/auth`, `apps/admin/src/stores/authStore.ts`, `apps/admin/src/routes` | `/login`, `/dashboard`, auth store | Vitest + build smoke |
-| B6 | 后台权限菜单 | [ ] | 菜单按权限显示，未授权路由不可访问 | `apps/admin/src/lib/permissions` | route guard | Vitest route guard |
+| B6 | 后台权限菜单 | [x] | 已按权限过滤后台菜单，并用 route guard 阻止未授权路由；`npm run test` 和 `npm run build` 通过 | `apps/admin/src/lib/permissions`, `apps/admin/src/routes` | route guard, `/products`, `/leads` | Vitest route guard + build smoke |
 | C1 | 创建车型分类表和实体 | [ ] | 可保存树形车型分类 | migration, `category` | `vehicle_category` | Repository test |
 | C2 | 实现后台分类 CRUD API | [ ] | 后台可新增、编辑、启停、排序分类 | `category/controller` | `GET/POST/PUT /api/admin/categories` | MockMvc CRUD |
 | C3 | 实现后台分类管理页面 | [ ] | Ant Design Tree/Table 可维护分类 | `apps/admin/src/features/category` | Category list/form | Vitest component test |

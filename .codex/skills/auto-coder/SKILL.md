@@ -18,7 +18,7 @@ Sync Spec -> Select Task -> Plan Files -> Implement -> Test/Fix -> Update Progre
 Run from the target project root:
 
 ```powershell
-python .github/skills/project-automation-skills/auto-coder/scripts/sync_spec.py --spec DEV_SPEC.md --out .codex/specs
+python .codex/skills/auto-coder/scripts/sync_spec.py --spec DEV_SPEC.md --out .codex/specs
 ```
 
 Then read `.codex/specs/06-*` for the schedule.

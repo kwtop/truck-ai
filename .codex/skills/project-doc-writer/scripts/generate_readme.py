@@ -134,7 +134,7 @@ Use example configuration files when present. Keep real secrets out of source co
 Run acceptance checks before handoff:
 
 ```powershell
-python .github/skills/project-automation-skills/acceptance-tester/scripts/init_acceptance_plan.py --spec DEV_SPEC.md --out ACCEPTANCE_TEST_PLAN.md
+python .codex/skills/acceptance-tester/scripts/init_acceptance_plan.py --spec DEV_SPEC.md --out ACCEPTANCE_TEST_PLAN.md
 ```
 """
 

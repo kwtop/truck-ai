@@ -46,7 +46,7 @@ Status markers:
 For a greenfield spec skeleton:
 
 ```powershell
-python .github/skills/project-automation-skills/project-planner/scripts/create_dev_spec.py --name "My App" --type web --description "Short product goal"
+python .codex/skills/project-planner/scripts/create_dev_spec.py --name "My App" --type web --description "Short product goal"
 ```
 
 Then edit the generated `DEV_SPEC.md` with project-specific details before handing off to `auto-coder`.

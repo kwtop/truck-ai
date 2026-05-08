@@ -11,7 +11,7 @@ Prepare a project so `auto-coder` and `acceptance-tester` can run commands relia
 
 1. Detect the stack before changing files:
    ```powershell
-   python .github/skills/project-automation-skills/project-setup/scripts/detect_stack.py
+   python .codex/skills/project-setup/scripts/detect_stack.py
    ```
 2. Read existing setup docs: `README.md`, `DEV_SPEC.md`, `.env.example`, package manifests, and CI config.
 3. Create missing local-only files from examples. Never commit real secrets.

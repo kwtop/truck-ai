@@ -25,13 +25,13 @@ Explain where the project stands and what should happen next.
 Run from the target project root:
 
 ```powershell
-python .github/skills/project-automation-skills/progress-checker/scripts/progress_report.py --spec DEV_SPEC.md
+python .codex/skills/progress-checker/scripts/progress_report.py --spec DEV_SPEC.md
 ```
 
 To write a markdown report:
 
 ```powershell
-python .github/skills/project-automation-skills/progress-checker/scripts/progress_report.py --spec DEV_SPEC.md --write PROGRESS_REPORT.md
+python .codex/skills/progress-checker/scripts/progress_report.py --spec DEV_SPEC.md --write PROGRESS_REPORT.md
 ```
 
 ## Reporting Rules

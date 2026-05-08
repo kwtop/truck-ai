@@ -12,7 +12,7 @@ Verify that the generated project satisfies `DEV_SPEC.md`.
 1. Read `DEV_SPEC.md`.
 2. If `ACCEPTANCE_TEST_PLAN.md` does not exist, create it:
    ```powershell
-   python .github/skills/project-automation-skills/acceptance-tester/scripts/init_acceptance_plan.py --spec DEV_SPEC.md --out ACCEPTANCE_TEST_PLAN.md
+   python .codex/skills/acceptance-tester/scripts/init_acceptance_plan.py --spec DEV_SPEC.md --out ACCEPTANCE_TEST_PLAN.md
    ```
 3. Execute one test at a time. Wait for output before starting the next test.
 4. Compare actual output to expected behavior.

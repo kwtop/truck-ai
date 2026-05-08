@@ -11,12 +11,12 @@ Prepare a project for handoff without deleting source code or hidden project sta
 
 1. Run a dry run first:
    ```powershell
-   python .github/skills/project-automation-skills/project-packager/scripts/clean_project.py
+   python .codex/skills/project-packager/scripts/clean_project.py
    ```
 2. Review the planned removals and secret findings.
 3. If the plan is acceptable, run with `--execute`:
    ```powershell
-   python .github/skills/project-automation-skills/project-packager/scripts/clean_project.py --execute
+   python .codex/skills/project-packager/scripts/clean_project.py --execute
    ```
 4. Run the project's normal test/build command if available.
 5. Confirm delivery essentials:
@@ -38,10 +38,10 @@ Prepare a project for handoff without deleting source code or hidden project sta
 
 ```powershell
 # Preserve data and logs
-python .github/skills/project-automation-skills/project-packager/scripts/clean_project.py --execute --keep-data
+python .codex/skills/project-packager/scripts/clean_project.py --execute --keep-data
 
 # Write a markdown checklist
-python .github/skills/project-automation-skills/project-packager/scripts/clean_project.py --write PACKAGE_REPORT.md
+python .codex/skills/project-packager/scripts/clean_project.py --write PACKAGE_REPORT.md
 ```
 
 ## Handoff Summary

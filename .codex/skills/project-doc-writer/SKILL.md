@@ -24,13 +24,13 @@ Create practical documentation that lets another developer run, test, and extend
 Generate a README draft from `DEV_SPEC.md`:
 
 ```powershell
-python .github/skills/project-automation-skills/project-doc-writer/scripts/generate_readme.py --spec DEV_SPEC.md --out README.md
+python .codex/skills/project-doc-writer/scripts/generate_readme.py --spec DEV_SPEC.md --out README.md
 ```
 
 Use `--force` to overwrite an existing README:
 
 ```powershell
-python .github/skills/project-automation-skills/project-doc-writer/scripts/generate_readme.py --spec DEV_SPEC.md --out README.md --force
+python .codex/skills/project-doc-writer/scripts/generate_readme.py --spec DEV_SPEC.md --out README.md --force
 ```
 
 ## README Structure

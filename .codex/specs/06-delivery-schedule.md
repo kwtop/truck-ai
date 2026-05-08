@@ -37,7 +37,7 @@
 | C6 | 后台参数模板表单 | [x] | 已实现后台参数模板页面、分类选择、属性列表、新增/编辑表单、JSON 配置校验和权限菜单接入；`npm run test`、`npm run build` 通过 | `apps/admin/src/features/attribute` | Attribute editor | Vitest 表单校验 |
 | C7 | 前台公开分类 API | [x] | 已实现 `GET /api/public/categories`，无需后台 JWT，只返回 ACTIVE 分类树并输出 SEO/display JSON 字段；`mvn -s .mvn-temp/settings.xml test` 通过，31 tests、0 failures、1 skipped | `category/public` | `GET /api/public/categories` | MockMvc public API |
 | D1 | 创建产品核心表 | [x] | 已新增 `product`、`product_translation` migration，并验证表结构、唯一约束和 translation 级联删除；`mvn -s .mvn-temp/settings.xml test` 通过，34 tests、0 failures、1 skipped | migration, `product` | `product`, `product_translation` | migration test |
-| D2 | 实现产品 specs 校验 | [ ] | 保存产品时按分类参数模板校验 JSONB specs | `product/service` | `ProductSpecValidator` | 单元测试各字段类型 |
+| D2 | 实现产品 specs 校验 | [x] | 已新增 `ProductSpecValidator`，按分类参数模板校验 required、unknown fields、number/text/select/multi_select/boolean/range、options、min/max/regex；`mvn -s .mvn-temp/settings.xml test` 通过，41 tests、0 failures、1 skipped | `product/service` | `ProductSpecValidator` | 单元测试各字段类型 |
 | D3 | 实现后台产品 CRUD API | [ ] | 可创建草稿、更新、发布、删除产品 | `product/controller` | `GET/POST/PUT/DELETE /api/admin/products` | MockMvc CRUD |
 | D4 | 实现产品多语言维护 | [ ] | 产品名称、描述、SEO 可按 locale 保存 | `product/translation` | `product_translation` | Service test fallback |
 | D5 | 后台产品列表和编辑页 | [ ] | 可选择分类、填写动态参数、多语言、SEO | `apps/admin/src/features/product` | Product list/form | Vitest + UI smoke |

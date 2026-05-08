@@ -1,0 +1,31 @@
+{
+  "home": {
+    "eyebrow": "B2B export truck platform",
+    "title": "Special truck solutions for overseas buyers",
+    "description": "A multilingual independent site for product discovery, RFQ conversion, and AI-assisted truck selection.",
+    "primaryCta": "Request a quote",
+    "secondaryCta": "Browse truck categories",
+    "stats": {
+      "categories": "Truck categories",
+      "locales": "Launch locales",
+      "response": "Sales response"
+    },
+    "highlights": [
+      {
+        "label": "Products",
+        "title": "Configurable truck catalog",
+        "description": "Tow trucks, fuel tank trucks, dump trucks, crane trucks, refrigerated trucks, and custom utility vehicles."
+      },
+      {
+        "label": "Markets",
+        "title": "Built for export markets",
+        "description": "Localized content for Mexico, Algeria, and South American buyers with room for more markets."
+      },
+      {
+        "label": "Conversion",
+        "title": "RFQ and AI assistant ready",
+        "description": "The first screen prepares the site for RFQ flows, WhatsApp contact, and truck selection assistance."
+      }
+    ]
+  }
+}

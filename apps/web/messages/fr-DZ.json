@@ -1,0 +1,31 @@
+{
+  "home": {
+    "eyebrow": "Plateforme B2B de camions d'exportation",
+    "title": "Solutions de camions speciaux pour acheteurs internationaux",
+    "description": "Un site multilingue pour decouvrir les produits, convertir les demandes RFQ et guider le choix des camions avec l'IA.",
+    "primaryCta": "Demander un devis",
+    "secondaryCta": "Voir les categories",
+    "stats": {
+      "categories": "Categories",
+      "locales": "Langues initiales",
+      "response": "Reponse commerciale"
+    },
+    "highlights": [
+      {
+        "label": "Produits",
+        "title": "Catalogue configurable",
+        "description": "Depanneuses, camions-citernes, bennes, camions-grues, camions frigorifiques et vehicules utilitaires sur mesure."
+      },
+      {
+        "label": "Marches",
+        "title": "Concu pour l'export",
+        "description": "Contenu localise pour le Mexique, l'Algerie et l'Amerique du Sud, extensible a d'autres marches."
+      },
+      {
+        "label": "Conversion",
+        "title": "Pret pour RFQ et assistant IA",
+        "description": "La premiere page prepare les demandes RFQ, WhatsApp et l'aide au choix du camion."
+      }
+    ]
+  }
+}

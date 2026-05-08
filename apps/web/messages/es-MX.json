@@ -1,0 +1,31 @@
+{
+  "home": {
+    "eyebrow": "Plataforma B2B de camiones de exportacion",
+    "title": "Soluciones de camiones especiales para compradores internacionales",
+    "description": "Un sitio independiente multilingue para descubrir productos, convertir RFQ y ayudar en la seleccion de camiones con IA.",
+    "primaryCta": "Solicitar cotizacion",
+    "secondaryCta": "Ver categorias",
+    "stats": {
+      "categories": "Categorias",
+      "locales": "Idiomas iniciales",
+      "response": "Respuesta comercial"
+    },
+    "highlights": [
+      {
+        "label": "Productos",
+        "title": "Catalogo configurable",
+        "description": "Gruas, camiones cisterna, volquetes, camiones con grua, refrigerados y vehiculos utilitarios personalizados."
+      },
+      {
+        "label": "Mercados",
+        "title": "Preparado para exportacion",
+        "description": "Contenido localizado para Mexico, Argelia y compradores de Sudamerica, con espacio para mas mercados."
+      },
+      {
+        "label": "Conversion",
+        "title": "Listo para RFQ e IA",
+        "description": "La primera pantalla prepara flujos RFQ, contacto por WhatsApp y asistencia de seleccion de camiones."
+      }
+    ]
+  }
+}

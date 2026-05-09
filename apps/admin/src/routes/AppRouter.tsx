@@ -1,6 +1,7 @@
 import { Navigate, RouterProvider, createBrowserRouter } from "react-router-dom";
 import { AttributePage } from "@/features/attribute/AttributePage";
 import { CategoryPage } from "@/features/category/CategoryPage";
+import { MediaPage } from "@/features/media/MediaPage";
 import { ProductPage } from "@/features/product/ProductPage";
 import { AdminLayout } from "./AdminLayout";
 import { DashboardPage } from "./DashboardPage";
@@ -45,6 +46,14 @@ const router = createBrowserRouter([
     element: (
       <AdminLayout>
         <AttributePage />
+      </AdminLayout>
+    )
+  },
+  {
+    path: "/media",
+    element: (
+      <AdminLayout>
+        <MediaPage />
       </AdminLayout>
     )
   },

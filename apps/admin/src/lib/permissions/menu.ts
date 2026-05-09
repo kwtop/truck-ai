@@ -31,6 +31,12 @@ export const adminMenuItems: AdminMenuItem[] = [
     requiredPermission: "attribute:read"
   },
   {
+    key: "media",
+    label: "Media",
+    path: "/media",
+    requiredPermission: "media:read"
+  },
+  {
     key: "leads",
     label: "Leads",
     path: "/leads",

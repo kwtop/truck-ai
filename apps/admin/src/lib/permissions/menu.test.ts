@@ -8,6 +8,9 @@ describe("permission menu", () => {
         (item) => item.path
       )
     ).toEqual(["/dashboard", "/categories", "/attributes", "/leads"]);
+    expect(
+      visibleMenuItems(["dashboard:read", "media:read"]).map((item) => item.path)
+    ).toEqual(["/dashboard", "/media"]);
   });
 
   it("checks individual permissions", () => {
@@ -21,6 +24,8 @@ describe("permission menu", () => {
     expect(canAccessPath("/products", ["dashboard:read"])).toBe(false);
     expect(canAccessPath("/categories", ["category:read"])).toBe(true);
     expect(canAccessPath("/attributes", ["attribute:read"])).toBe(true);
+    expect(canAccessPath("/media", ["media:read"])).toBe(true);
+    expect(canAccessPath("/media", ["product:read"])).toBe(false);
     expect(canAccessPath("/unknown", [])).toBe(true);
   });
 });

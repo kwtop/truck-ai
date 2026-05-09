@@ -47,6 +47,12 @@ export const adminMenuItems: AdminMenuItem[] = [
     label: "Leads",
     path: "/leads",
     requiredPermission: "lead:read"
+  },
+  {
+    key: "ai-chat-sessions",
+    label: "AI Chats",
+    path: "/ai/chat-sessions",
+    requiredPermission: "ai:read"
   }
 ];
 

@@ -4,10 +4,11 @@ import { CategoryPage } from "@/features/category/CategoryPage";
 import { MediaPage } from "@/features/media/MediaPage";
 import { PageBuilderPage } from "@/features/page/PageBuilderPage";
 import { ProductPage } from "@/features/product/ProductPage";
+import { LeadPage } from "@/features/lead/LeadPage";
+import { AiChatSessionPage } from "@/features/ai/AiChatSessionPage";
 import { AdminLayout } from "./AdminLayout";
 import { DashboardPage } from "./DashboardPage";
 import { LoginPage } from "./LoginPage";
-import { PlaceholderPage } from "./PlaceholderPage";
 
 const router = createBrowserRouter([
   {
@@ -70,7 +71,15 @@ const router = createBrowserRouter([
     path: "/leads",
     element: (
       <AdminLayout>
-        <PlaceholderPage title="Leads" />
+        <LeadPage />
+      </AdminLayout>
+    )
+  },
+  {
+    path: "/ai/chat-sessions",
+    element: (
+      <AdminLayout>
+        <AiChatSessionPage />
       </AdminLayout>
     )
   },

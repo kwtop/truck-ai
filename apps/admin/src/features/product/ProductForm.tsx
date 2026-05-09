@@ -2,6 +2,7 @@ import { Checkbox, Form, Input, InputNumber, Select, Space, Typography } from "a
 import type { FormInstance } from "antd";
 import type { VehicleAttributeDefinition } from "@/features/attribute/attributeApi";
 import type { FlatCategoryOption } from "@/features/attribute/categoryOptions";
+import { LocaleTabs } from "@/components/i18n/LocaleTabs";
 import type { ProductFormValues } from "./productFormModel";
 
 type ProductFormProps = {
@@ -18,6 +19,7 @@ export function ProductForm({
   loadingAttributes = false
 }: ProductFormProps) {
   const activeAttributes = attributes.filter((attribute) => attribute.status === "ACTIVE");
+  const activeTranslationLocale = Form.useWatch("translationLocale", form);
 
   return (
     <Form<ProductFormValues>
@@ -112,45 +114,54 @@ export function ProductForm({
       </Form.Item>
 
       <Typography.Title level={5}>Translation</Typography.Title>
-      <Form.Item name="translationLocale" label="Locale">
-        <Input placeholder="en-US" />
-      </Form.Item>
-      <Form.Item name="translationName" label="Localized name">
-        <Input placeholder="10,000L Fuel Tank Truck" />
-      </Form.Item>
-      <Form.Item name="translationSummary" label="Localized summary">
-        <Input.TextArea rows={2} />
-      </Form.Item>
-      <Form.Item name="translationDescription" label="Description">
-        <Input.TextArea rows={4} />
-      </Form.Item>
-      <Form.Item name="translationApplications" label="Applications">
-        <Input.TextArea rows={3} />
-      </Form.Item>
-      <Form.Item name="localizedSpecsJson" label="Localized specs JSON">
-        <Input.TextArea rows={3} placeholder='{"tank_capacity":"10000 L"}' />
-      </Form.Item>
-      <Form.Item name="seoTitle" label="SEO title">
+      <Form.Item name="translationLocale" hidden>
         <Input />
       </Form.Item>
-      <Form.Item name="seoDescription" label="SEO description">
-        <Input.TextArea rows={2} />
-      </Form.Item>
-      <Form.Item name="seoKeywords" label="SEO keywords">
-        <Input />
-      </Form.Item>
-      <Form.Item name="canonicalUrl" label="Canonical URL">
-        <Input />
-      </Form.Item>
-      <Form.Item name="ogTitle" label="OG title">
-        <Input />
-      </Form.Item>
-      <Form.Item name="ogDescription" label="OG description">
-        <Input.TextArea rows={2} />
-      </Form.Item>
-      <Form.Item name="ogImage" label="OG image">
-        <Input />
-      </Form.Item>
+      <LocaleTabs
+        value={activeTranslationLocale}
+        onChange={(locale) => form.setFieldsValue({ translationLocale: locale })}
+      >
+        {(locale) => (
+          <div>
+            <Form.Item name="translationName" label={`Localized name (${locale})`}>
+              <Input placeholder="10,000L Fuel Tank Truck" />
+            </Form.Item>
+            <Form.Item name="translationSummary" label={`Localized summary (${locale})`}>
+              <Input.TextArea rows={2} />
+            </Form.Item>
+            <Form.Item name="translationDescription" label={`Description (${locale})`}>
+              <Input.TextArea rows={4} />
+            </Form.Item>
+            <Form.Item name="translationApplications" label={`Applications (${locale})`}>
+              <Input.TextArea rows={3} />
+            </Form.Item>
+            <Form.Item name="localizedSpecsJson" label={`Localized specs JSON (${locale})`}>
+              <Input.TextArea rows={3} placeholder='{"tank_capacity":"10000 L"}' />
+            </Form.Item>
+            <Form.Item name="seoTitle" label={`SEO title (${locale})`}>
+              <Input />
+            </Form.Item>
+            <Form.Item name="seoDescription" label={`SEO description (${locale})`}>
+              <Input.TextArea rows={2} />
+            </Form.Item>
+            <Form.Item name="seoKeywords" label={`SEO keywords (${locale})`}>
+              <Input />
+            </Form.Item>
+            <Form.Item name="canonicalUrl" label={`Canonical URL (${locale})`}>
+              <Input />
+            </Form.Item>
+            <Form.Item name="ogTitle" label={`OG title (${locale})`}>
+              <Input />
+            </Form.Item>
+            <Form.Item name="ogDescription" label={`OG description (${locale})`}>
+              <Input.TextArea rows={2} />
+            </Form.Item>
+            <Form.Item name="ogImage" label={`OG image (${locale})`}>
+              <Input />
+            </Form.Item>
+          </div>
+        )}
+      </LocaleTabs>
     </Form>
   );
 }

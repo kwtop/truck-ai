@@ -4,10 +4,10 @@ import { canAccessPath, hasPermission, visibleMenuItems } from "./menu";
 describe("permission menu", () => {
   it("filters menu items by permission", () => {
     expect(
-      visibleMenuItems(["dashboard:read", "category:read", "attribute:read", "lead:read"]).map(
+      visibleMenuItems(["dashboard:read", "category:read", "attribute:read", "lead:read", "ai:read"]).map(
         (item) => item.path
       )
-    ).toEqual(["/dashboard", "/categories", "/attributes", "/leads"]);
+    ).toEqual(["/dashboard", "/categories", "/attributes", "/leads", "/ai/chat-sessions"]);
     expect(
       visibleMenuItems(["dashboard:read", "media:read", "page:read"]).map((item) => item.path)
     ).toEqual(["/dashboard", "/media", "/pages"]);
@@ -28,6 +28,8 @@ describe("permission menu", () => {
     expect(canAccessPath("/media", ["product:read"])).toBe(false);
     expect(canAccessPath("/pages", ["page:read"])).toBe(true);
     expect(canAccessPath("/pages", ["media:read"])).toBe(false);
+    expect(canAccessPath("/ai/chat-sessions", ["ai:read"])).toBe(true);
+    expect(canAccessPath("/ai/chat-sessions", ["lead:read"])).toBe(false);
     expect(canAccessPath("/unknown", [])).toBe(true);
   });
 });

@@ -16,6 +16,12 @@ import {
 } from "./productApi";
 import type { Product, ProductPayload, ProductStatus } from "./productApi";
 import {
+  productCategoryLabel,
+  productEmptyDescription,
+  productFlagLabels,
+  productStatusColor
+} from "./productTablePresentation";
+import {
   defaultProductFormValues,
   formValuesToProductPayload,
   formValuesToTranslationPayload,
@@ -144,7 +150,7 @@ export function ProductPage() {
       title: "Category",
       dataIndex: "categoryId",
       key: "categoryId",
-      render: (value: number) => categoryNameById.get(value) ?? value
+      render: (value: number) => productCategoryLabel(categoryNameById, value)
     },
     {
       title: "Status",
@@ -152,9 +158,7 @@ export function ProductPage() {
       key: "status",
       width: 130,
       render: (value: ProductStatus) => (
-        <Tag color={value === "PUBLISHED" ? "green" : value === "DRAFT" ? "blue" : "default"}>
-          {value}
-        </Tag>
+        <Tag color={productStatusColor(value)}>{value}</Tag>
       )
     },
     {
@@ -163,8 +167,11 @@ export function ProductPage() {
       width: 180,
       render: (_, record) => (
         <Space wrap>
-          {record.featured ? <Tag color="gold">Featured</Tag> : null}
-          {record.aiEnabled ? <Tag color="purple">AI</Tag> : null}
+          {productFlagLabels(record).map((flag) => (
+            <Tag key={flag.label} color={flag.color}>
+              {flag.label}
+            </Tag>
+          ))}
         </Space>
       )
     },
@@ -252,9 +259,9 @@ export function ProductPage() {
         pagination={false}
         locale={{
           emptyText: productsQuery.isError ? (
-            <Empty description={getErrorMessage(productsQuery.error)} />
+            <Empty description={productEmptyDescription(productsQuery.error)} />
           ) : (
-            <Empty description="No products" />
+            <Empty description={productEmptyDescription(null)} />
           )
         }}
       />
@@ -281,10 +288,6 @@ export function ProductPage() {
       </Modal>
     </section>
   );
-}
-
-function getErrorMessage(error: unknown) {
-  return error instanceof Error ? error.message : "Unable to load products";
 }
 
 function setProductFormValues(values: ProductFormValues, form: ReturnType<typeof Form.useForm<ProductFormValues>>[0]) {

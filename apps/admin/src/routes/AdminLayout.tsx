@@ -13,12 +13,15 @@ export function AdminLayout({ children }: PropsWithChildren) {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const menuItems = visibleMenuItems(permissions);
 
-  if (!isAuthenticated || !user) {
-    return <Navigate to="/login" replace />;
-  }
+  const redirectTo = resolveAdminLayoutRedirect({
+    pathname: location.pathname,
+    isAuthenticated,
+    hasUser: Boolean(user),
+    permissions
+  });
 
-  if (!canAccessPath(location.pathname, permissions)) {
-    return <Navigate to="/dashboard" replace />;
+  if (redirectTo) {
+    return <Navigate to={redirectTo} replace />;
   }
 
   return (
@@ -41,7 +44,7 @@ export function AdminLayout({ children }: PropsWithChildren) {
         <Layout.Header className="admin-header">
           <Typography.Title level={2}>Admin Dashboard</Typography.Title>
           <Space>
-            <Typography.Text>{user.displayName}</Typography.Text>
+            <Typography.Text>{user?.displayName}</Typography.Text>
             <Button onClick={logout}>Sign out</Button>
           </Space>
         </Layout.Header>
@@ -49,4 +52,26 @@ export function AdminLayout({ children }: PropsWithChildren) {
       </Layout>
     </Layout>
   );
+}
+
+export function resolveAdminLayoutRedirect({
+  pathname,
+  isAuthenticated,
+  hasUser,
+  permissions
+}: {
+  pathname: string;
+  isAuthenticated: boolean;
+  hasUser: boolean;
+  permissions: string[];
+}) {
+  if (!isAuthenticated || !hasUser) {
+    return "/login";
+  }
+
+  if (!canAccessPath(pathname, permissions)) {
+    return "/dashboard";
+  }
+
+  return null;
 }

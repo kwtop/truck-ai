@@ -37,6 +37,12 @@ export const adminMenuItems: AdminMenuItem[] = [
     requiredPermission: "media:read"
   },
   {
+    key: "pages",
+    label: "Page Builder",
+    path: "/pages",
+    requiredPermission: "page:read"
+  },
+  {
     key: "leads",
     label: "Leads",
     path: "/leads",
